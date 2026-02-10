@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { PlayCircle, Download, Calendar } from 'lucide-react';
 import PurchaseSuccessModal from '@/components/PurchaseSuccessModal';
@@ -11,7 +12,9 @@ export default function DashboardPage() {
     return (
         <div className="bg-fv-primary min-h-screen py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <PurchaseSuccessModal />
+                <Suspense fallback={null}>
+                    <PurchaseSuccessModal />
+                </Suspense>
                 <h1 className="text-3xl font-bold text-white mb-8">Hola, Entrenador <span className="text-fv-accent">.</span></h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
