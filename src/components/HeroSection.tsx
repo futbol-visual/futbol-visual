@@ -3,62 +3,65 @@ import Link from 'next/link';
 export default function HeroSection() {
     return (
         <div className="relative overflow-hidden bg-fv-primary pb-16 pt-16 sm:pb-24 lg:pb-32">
-            {/* Background decoration */}
-            <div className="absolute top-0 transform -translate-x-1/2 left-1/2 w-full h-[500px] bg-fv-accent/20 blur-[120px] rounded-full opacity-30 pointer-events-none"></div>
+            {/* Background decoration with pulse animation */}
+            <div className="absolute top-0 transform -translate-x-1/2 left-1/2 w-full h-[500px] bg-fv-accent/20 blur-[120px] rounded-full opacity-30 pointer-events-none animate-pulse"></div>
 
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
-                    <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-20 xl:col-span-6">
-                        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-6">
-                            Eleva tu nivel como <br />
-                            <span className="text-fv-accent">Entrenador de Fútbol</span>
+                    <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-20 xl:col-span-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-6 leading-tight">
+                            Domina el Juego con <br />
+                            <span className="text-fv-accent">Análisis Visual</span>
                         </h1>
-                        <p className="mt-6 text-lg text-gray-300 leading-8">
-                            La primera academia online basada en el <span className="text-white font-bold">aprendizaje visual</span>.
-                            Domina la táctica con análisis de video, ejercicios reales y formación específica por posición.
+                        <p className="mt-6 text-lg text-gray-300 leading-relaxed">
+                            Transforma tu visión táctica. Deja atrás la teoría abstracta y aprende con <span className="text-white font-semibold">situaciones reales de partido</span> que marcan la diferencia en el campo.
                         </p>
                         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
                             <Link
                                 href="/cursos"
-                                className="rounded-full bg-fv-accent px-8 py-3.5 text-base font-bold text-black shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 transition-all transform hover:scale-105"
+                                className="rounded-full bg-fv-accent px-8 py-3.5 text-base font-bold text-black shadow-[0_0_20px_rgba(34,220,118,0.3)] hover:shadow-[0_0_30px_rgba(34,220,118,0.5)] hover:bg-[#1fe078] transition-all transform hover:scale-105 active:scale-95 duration-200"
                             >
-                                Ver Cursos Completos
+                                Explorar Academia
                             </Link>
                             <Link
                                 href="/packs"
-                                className="rounded-full bg-white/10 px-8 py-3.5 text-base font-bold text-white hover:bg-white/20 border border-white/20 transition-all backdrop-blur-sm"
+                                className="rounded-full bg-white/5 px-8 py-3.5 text-base font-bold text-white hover:bg-white/10 border border-white/10 transition-all backdrop-blur-sm hover:border-fv-accent/30"
                             >
                                 Packs por Posición
                             </Link>
                         </div>
 
-                        <div className="mt-10 pt-10 border-t border-white/10 flex items-center gap-8 text-gray-400 text-sm">
+                        <div className="mt-12 pt-10 border-t border-white/10 flex flex-wrap items-center gap-x-8 gap-y-4 text-gray-400 text-sm">
                             <div className="flex items-center gap-2">
-                                <div className="h-2 w-2 rounded-full bg-fv-accent"></div>
-                                <span>Análisis de Video</span>
+                                <span className="flex h-2 w-2 rounded-full bg-fv-accent"></span>
+                                <span>Cortes Tácticos 4K</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="h-2 w-2 rounded-full bg-fv-accent"></div>
-                                <span>Ejercicios Reales</span>
+                                <span className="flex h-2 w-2 rounded-full bg-fv-accent"></span>
+                                <span>De la Pantalla al Campo</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="h-2 w-2 rounded-full bg-fv-accent"></div>
-                                <span>100% Online</span>
+                                <span className="flex h-2 w-2 rounded-full bg-fv-accent"></span>
+                                <span>Micro-Conceptos</span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
-                        <div className="relative rounded-2xl bg-fv-secondary/50 p-4 border border-white/10 backdrop-blur-md shadow-2xl">
+                    <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6 animate-in fade-in zoom-in duration-1000 delay-200">
+                        <div className="relative rounded-2xl bg-neutral-900/50 p-2 border border-white/10 backdrop-blur-md shadow-2xl skew-y-1 transform transition-transform hover:skew-y-0 duration-500">
                             {/* Placeholder for the user provided image or a generic tactical board representation */}
-                            <div className="aspect-[4/3] bg-gradient-to-br from-neutral-800 to-black rounded-xl border border-white/5 flex items-center justify-center overflow-hidden relative">
-                                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=3540&auto=format&fit=crop')] bg-cover bg-center opacity-40"></div>
-                                <div className="relative z-10 text-center p-6">
-                                    <div className="w-16 h-16 bg-fv-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-black"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <div className="aspect-[4/3] bg-neutral-900 rounded-xl overflow-hidden relative group">
+                                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=3540&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                                <div className="absolute bottom-6 left-6 right-6 z-10">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="w-10 h-10 bg-fv-accent/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-fv-accent/30">
+                                            <div className="w-3 h-3 bg-fv-accent rounded-full animate-pulse"></div>
+                                        </div>
+                                        <span className="text-fv-accent font-mono text-xs uppercase tracking-widest">En Directo</span>
                                     </div>
-                                    <p className="text-white font-bold text-xl mb-1">Análisis Táctico en Vivo</p>
-                                    <p className="text-gray-400 text-sm">Aprende viendo fútbol real</p>
+                                    <p className="text-white font-bold text-2xl leading-tight">Análisis Táctico: <br />Presión Alta vs Bloque Bajo</p>
                                 </div>
                             </div>
                         </div>
