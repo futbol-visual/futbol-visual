@@ -10,7 +10,7 @@ export default function HeroSection() {
                 <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
                     <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-20 xl:col-span-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-6 leading-tight whitespace-pre-line">
-                            Eleva tu nivel como Entrenador de Fútbol
+                            Eleva tu nivel como <span className="text-fv-accent">Entrenador de Fútbol</span>
                         </h1>
                         <p className="mt-6 text-lg text-gray-300 leading-relaxed">
                             La primera academia online basada en el aprendizaje visual. Domina la táctica con análisis de video, ejercicios reales y formación específica por posición.
