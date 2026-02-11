@@ -81,17 +81,17 @@ export const translations: Record<Language, Dictionary> = {
             subtitle: 'La primera academia online basada en el aprendizaje visual. Domina la táctica con análisis de video, ejercicios reales y formación específica por posición.',
             cta_courses: 'Ver Cursos Completos',
             cta_packs: 'Packs por Posición',
-            badge_video: 'Análisis de Video con Micro-conceptos Específicos',
-            badge_exercises: 'Ejercicios Reales',
-            badge_online: '100% Online',
+            badge_video: 'Micro-conceptos Tácticos',
+            badge_exercises: 'Tareas Listas para Entrenar',
+            badge_online: '100% Online, a tu ritmo, con resultados inmediatos',
             live_analysis: 'Análisis Táctico',
             live_analysis_sub: 'Presión Alta vs Bloque Bajo',
         },
         value_prop: {
             title: '¿Por qué elegir Fútbol Visual?',
             subtitle: 'Olvídate de la teoría aburrida. Nuestra metodología se basa en lo que realmente sucede en el campo.',
-            card1_title: 'Cortes Tácticos 4K',
-            card1_desc: 'Aprende viendo, no solo leyendo. Desglosamos jugadas reales en alta definición para que entiendas el "por qué" de cada movimiento al instante.',
+            card1_title: 'Cortes Tácticos',
+            card1_desc: 'Aprende viendo, no solo leyendo. Desglosamos jugadas reales para que entiendas el "por qué" de cada movimiento al instante.',
             card2_title: 'De la Pantalla al Campo',
             card2_desc: 'Tareas listas para tu sesión. Conecta el análisis visual con ejercicios prácticos diseñados para transferir los conceptos a tus jugadores.',
             card3_title: 'Micro-Conceptos',
@@ -145,17 +145,17 @@ export const translations: Record<Language, Dictionary> = {
             subtitle: '視覚学習に基づいた初のオンラインアカデミー。ビデオ分析、実践的な練習、ポジション別の専門トレーニングで戦術をマスターしましょう。',
             cta_courses: '全コースを見る',
             cta_packs: 'ポジション別パック',
-            badge_video: '詳細なマイクロコンセプトを含むビデオ分析',
-            badge_exercises: '実践的な練習メニュー',
-            badge_online: '100% オンライン',
+            badge_video: '戦術的マイクロコンセプト', // Updated
+            badge_exercises: 'すぐに使えるトレーニング課題', // Updated
+            badge_online: '100% オンライン、自分のペースで、即座に結果を', // Updated
             live_analysis: '戦術分析',
             live_analysis_sub: 'ハイプレス vs ローブロック',
         },
         value_prop: {
             title: 'なぜFútbol Visualを選ぶのか？',
             subtitle: '退屈な理論は忘れましょう。私たちの方法は、ピッチ上で実際に起こっていることに基づいています。',
-            card1_title: '4K戦術クリップ',
-            card1_desc: '読むだけでなく、見て学ぶ。実際のプレーを高画質で分解し、それぞれの動きの「なぜ」を瞬時に理解できるようにします。',
+            card1_title: '戦術クリップ', // Removed 4K
+            card1_desc: '読むだけでなく、見て学ぶ。実際のプレーを分解し、それぞれの動きの「なぜ」を瞬時に理解できるようにします。', // Removed HD ref
             card2_title: '画面からピッチへ',
             card2_desc: 'セッションですぐに使えるタスク。視覚的な分析を、コンセプトを選手に伝えるために設計された実践的な練習と結びつけます。',
             card3_title: 'マイクロコンセプト',

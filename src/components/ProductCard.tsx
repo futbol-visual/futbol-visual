@@ -10,11 +10,49 @@ interface ProductCardProps {
     image: string;
     type: 'course' | 'pack';
     slug: string;
+    comingSoon?: boolean;
 }
 
-export default function ProductCard({ title, description, priceMXN, priceEUR, image, type, slug }: ProductCardProps) {
+export default function ProductCard({
+    title,
+    description,
+    priceMXN,
+    priceEUR,
+    image,
+    type,
+    slug,
+    comingSoon
+}: ProductCardProps) {
     const isCourse = type === 'course';
-    const linkHref = isCourse ? `/cursos` : `/packs`; // Ideally this would link to specific product details
+    const href = isCourse ? `/cursos/${slug}` : `/packs/${slug}`;
+
+    if (comingSoon) {
+        return (
+            <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800 transition-all">
+                <div className="relative aspect-video overflow-hidden opacity-50 grayscale">
+                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${image}')` }}></div>
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                        <span className="bg-fv-accent/20 text-fv-accent border border-fv-accent/30 px-4 py-2 rounded-full font-bold uppercase tracking-widest text-sm backdrop-blur-md">
+                            Próximamente
+                        </span>
+                    </div>
+                </div>
+                <div className="flex flex-1 flex-col p-6 opacity-60">
+                    <div className="mb-4 flex items-center justify-between">
+                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${isCourse ? 'bg-neutral-800 text-gray-400' : 'bg-neutral-800 text-gray-400'}`}>
+                            {isCourse ? 'Curso Completo' : 'Pack por Posición'}
+                        </span>
+                    </div>
+                    <h3 className="mb-2 text-xl font-bold text-white">
+                        {title}
+                    </h3>
+                    <p className="mb-6 flex-1 text-sm text-gray-400 leading-relaxed line-clamp-3">
+                        {description}
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-fv-secondary border border-neutral-800 hover:border-fv-accent/50 transition-all duration-300">
@@ -56,21 +94,12 @@ export default function ProductCard({ title, description, priceMXN, priceEUR, im
                     </div>
 
                     <div className="grid grid-cols-2 gap-2">
-                        {isCourse ? (
-                            <Link
-                                href={`/cursos/${slug}`}
-                                className="flex items-center justify-center rounded-lg border border-neutral-700 bg-transparent px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-black"
-                            >
-                                Ver Temario
-                            </Link>
-                        ) : (
-                            <Link
-                                href={`/packs`}
-                                className="flex items-center justify-center rounded-lg border border-neutral-700 bg-transparent px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-black"
-                            >
-                                + Info
-                            </Link>
-                        )}
+                        <Link
+                            href={href}
+                            className="flex items-center justify-center rounded-lg border border-neutral-700 bg-transparent px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-black"
+                        >
+                            {isCourse ? 'Ver Temario' : '+ Info'}
+                        </Link>
 
                         <BuyButton
                             slug={slug}

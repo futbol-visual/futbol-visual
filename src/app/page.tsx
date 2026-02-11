@@ -19,6 +19,16 @@ export default function Home() {
             image: "https://images.unsplash.com/photo-1518605348433-e341908d5f66?q=80&w=3540&auto=format&fit=crop", // Placeholder
             type: "course" as const,
             slug: "master-analisis"
+        },
+        {
+            title: "Máster en Preparación Física",
+            description: "Metodología aplicada al fútbol base. Planificación, cargas y prevención de lesiones para potenciar a tus jugadores.",
+            priceMXN: 0,
+            priceEUR: 0,
+            image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=3540&auto=format&fit=crop",
+            type: "course" as const,
+            slug: "master-fisica",
+            comingSoon: true // Custom flag I'll handle in ProductCard or here
         }
     ];
 
