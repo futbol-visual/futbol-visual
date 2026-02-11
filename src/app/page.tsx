@@ -1,10 +1,15 @@
+'use client';
+
 import HeroSection from '@/components/HeroSection';
 import SectionHeader from '@/components/SectionHeader';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 import { MonitorPlay, Shield, Target, Award, Plus } from 'lucide-react';
+import { useTranslation } from '@/context/i18n-context';
 
 export default function Home() {
+    const { t } = useTranslation();
+
     const featuredCourses = [
         {
             title: "Máster en Análisis Táctico",
@@ -57,8 +62,8 @@ export default function Home() {
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <SectionHeader
-                        title="¿Por qué elegir Fútbol Visual?"
-                        subtitle="Olvídate de la teoría aburrida. Nuestra metodología se basa en lo que realmente sucede en el campo."
+                        title={t('value_prop.title')}
+                        subtitle={t('value_prop.subtitle')}
                         centered={true}
                     />
 
@@ -67,9 +72,9 @@ export default function Home() {
                             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-fv-accent/20 to-transparent flex items-center justify-center text-fv-accent mb-6 group-hover:scale-110 transition-transform duration-300 border border-fv-accent/10">
                                 <MonitorPlay size={40} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">Cortes Tácticos 4K</h3>
+                            <h3 className="text-2xl font-bold text-white mb-4">{t('value_prop.card1_title')}</h3>
                             <p className="text-gray-400 leading-relaxed text-sm">
-                                Aprende viendo, no solo leyendo. Desglosamos jugadas reales en alta definición para que entiendas el "por qué" de cada movimiento al instante.
+                                {t('value_prop.card1_desc')}
                             </p>
                         </div>
 
@@ -77,9 +82,9 @@ export default function Home() {
                             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-fv-accent/20 to-transparent flex items-center justify-center text-fv-accent mb-6 group-hover:scale-110 transition-transform duration-300 border border-fv-accent/10">
                                 <Shield size={40} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">De la Pantalla al Campo</h3>
+                            <h3 className="text-2xl font-bold text-white mb-4">{t('value_prop.card2_title')}</h3>
                             <p className="text-gray-400 leading-relaxed text-sm">
-                                Tareas listas para tu sesión. Conecta el análisis visual con ejercicios prácticos diseñados para transferir los conceptos a tus jugadores.
+                                {t('value_prop.card2_desc')}
                             </p>
                         </div>
 
@@ -87,9 +92,9 @@ export default function Home() {
                             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-fv-accent/20 to-transparent flex items-center justify-center text-fv-accent mb-6 group-hover:scale-110 transition-transform duration-300 border border-fv-accent/10">
                                 <Target size={40} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">Micro-Conceptos</h3>
+                            <h3 className="text-2xl font-bold text-white mb-4">{t('value_prop.card3_title')}</h3>
                             <p className="text-gray-400 leading-relaxed text-sm">
-                                Mejora jugador a jugador. Contenido ultra-específico por demarcación para potenciar el rendimiento individual dentro del sistema colectivo.
+                                {t('value_prop.card3_desc')}
                             </p>
                         </div>
                     </div>
@@ -103,14 +108,14 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                         <div>
-                            <span className="text-fv-accent font-bold tracking-wider text-sm uppercase mb-2 block">Formación de Élite</span>
-                            <h2 className="text-3xl md:text-4xl font-bold text-white">Cursos Destacados <span className="text-fv-accent">.</span></h2>
+                            <span className="text-fv-accent font-bold tracking-wider text-sm uppercase mb-2 block">{t('courses.tag')}</span>
+                            <h2 className="text-3xl md:text-4xl font-bold text-white">{t('courses.title')} <span className="text-fv-accent">.</span></h2>
                             <p className="text-gray-400 mt-3 max-w-xl text-lg">
-                                Programas completos diseñados para transformar tu comprensión del juego desde la base hasta la élite.
+                                {t('courses.subtitle')}
                             </p>
                         </div>
                         <Link href="/cursos" className="hidden md:flex items-center gap-2 text-white hover:text-fv-accent transition-colors group font-medium">
-                            Ver catálogo completo <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            {t('courses.cta_all')} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
 
@@ -123,8 +128,8 @@ export default function Home() {
                             <div className="w-16 h-16 rounded-full bg-neutral-800 flex items-center justify-center text-gray-500 mb-4 group-hover:text-white group-hover:bg-neutral-700 transition-colors">
                                 <Plus size={32} />
                             </div>
-                            <h3 className="text-white font-bold text-lg mb-2">Próximamente</h3>
-                            <p className="text-gray-500 text-sm">Nuevos cursos en producción</p>
+                            <h3 className="text-white font-bold text-lg mb-2">{t('courses.coming_soon_title')}</h3>
+                            <p className="text-gray-500 text-sm">{t('courses.coming_soon_desc')}</p>
                         </div>
                     </div>
                 </div>
@@ -137,14 +142,14 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                         <div>
-                            <span className="text-blue-400 font-bold tracking-wider text-sm uppercase mb-2 block">Específico por Posición</span>
-                            <h2 className="text-3xl md:text-4xl font-bold text-white">Packs de Video <span className="text-fv-accent">.</span></h2>
+                            <span className="text-blue-400 font-bold tracking-wider text-sm uppercase mb-2 block">{t('packs.tag')}</span>
+                            <h2 className="text-3xl md:text-4xl font-bold text-white">{t('packs.title')} <span className="text-fv-accent">.</span></h2>
                             <p className="text-gray-400 mt-3 max-w-xl text-lg">
-                                Mejora el rendimiento individual de tus jugadores con colecciones de clips categorizados por demarcación.
+                                {t('packs.subtitle')}
                             </p>
                         </div>
                         <Link href="/packs" className="hidden md:flex items-center gap-2 text-white hover:text-fv-accent transition-colors group font-medium">
-                            Ver todos los packs <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            {t('packs.cta_all')} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
 
@@ -156,7 +161,7 @@ export default function Home() {
 
                     <div className="mt-12 text-center md:hidden">
                         <Link href="/packs" className="inline-flex items-center gap-2 text-fv-accent hover:text-white transition-colors">
-                            Ver todos los packs <ArrowRight size={16} />
+                            {t('packs.cta_mobile')} <ArrowRight size={16} />
                         </Link>
                     </div>
                 </div>
@@ -174,17 +179,16 @@ export default function Home() {
                         <div className="md:w-1/2 relative z-10">
                             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fv-accent/10 text-fv-accent font-bold text-xs uppercase tracking-wider mb-6 border border-fv-accent/20">
                                 <span className="w-2 h-2 rounded-full bg-fv-accent animate-pulse"></span>
-                                Próximamente
+                                {t('pro.tag')}
                             </span>
                             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                                 Fútbol Visual <span className="text-transparent bg-clip-text bg-gradient-to-r from-fv-accent to-green-300">PRO</span>
                             </h2>
                             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                                Acceso ilimitado a <span className="text-white font-semibold">toda la academia</span> por una suscripción mensual.
-                                Cursos avanzados, packs semanales, recursos descargables y sesiones de análisis en vivo exclusivas.
+                                {t('pro.subtitle')}
                             </p>
                             <button disabled className="px-8 py-4 bg-white/5 text-gray-400 font-bold rounded-xl cursor-not-allowed border border-white/5 flex items-center gap-3">
-                                Unirse a la lista de espera <ArrowRight size={18} />
+                                {t('pro.cta_waitlist')} <ArrowRight size={18} />
                             </button>
                         </div>
                         <div className="md:w-1/2 flex justify-center relative z-10">
@@ -202,17 +206,17 @@ export default function Home() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-800/30 via-neutral-900/0 to-neutral-900/0 pointer-events-none"></div>
 
                 <div className="max-w-4xl mx-auto px-4 relative z-10">
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight tracking-tight">
-                        ¿Listo para transformar <br /> la identidad de tu equipo?
+                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight tracking-tight whitespace-pre-line">
+                        {t('cta_final.title')}
                     </h2>
                     <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                        Únete a la nueva generación de entrenadores que dominan el lenguaje visual del fútbol moderno.
+                        {t('cta_final.subtitle')}
                     </p>
                     <Link
                         href="/cursos"
                         className="inline-flex items-center gap-3 rounded-full bg-fv-accent px-10 py-5 text-xl font-bold text-black shadow-[0_0_20px_rgba(34,220,118,0.4)] hover:shadow-[0_0_40px_rgba(34,220,118,0.6)] hover:bg-[#1fe078] hover:scale-105 transition-all duration-300"
                     >
-                        Empezar Ahora <ArrowRight size={20} strokeWidth={2.5} />
+                        {t('cta_final.button')} <ArrowRight size={20} strokeWidth={2.5} />
                     </Link>
                 </div>
             </section>
