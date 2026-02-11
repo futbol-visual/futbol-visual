@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { translations, Language, TranslationKey } from '@/data/dictionaries';
 
