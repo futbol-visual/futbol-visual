@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "Plataforma educativa premium para entrenadores de fútbol. Aprende con análisis de video y ejercicios reales.",
 };
 
-import { I18nProvider } from '@/context/i18n-context';
+
 
 export default function RootLayout({
     children,
@@ -21,13 +21,11 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={`${inter.className} bg-fv-primary text-white min-h-screen flex flex-col`}>
-                <I18nProvider>
-                    <Navbar />
-                    <main className="flex-grow pt-16">
-                        {children}
-                    </main>
-                    <Footer />
-                </I18nProvider>
+                <Navbar />
+                <main className="flex-grow pt-16">
+                    {children}
+                </main>
+                <Footer />
             </body>
         </html>
     );
