@@ -21,14 +21,24 @@ export default function Home() {
             slug: "master-analisis"
         },
         {
-            title: "Máster en Preparación Física",
-            description: "Metodología aplicada al fútbol base. Planificación, cargas y prevención de lesiones para potenciar a tus jugadores.",
+            title: "Máster en Preparación Física Aplicada al Fútbol Base",
+            description: "Planificación, cargas y prevención de lesiones, adaptado a la realidad del fútbol formativo para potenciar a tus jugadores.",
             priceMXN: 0,
             priceEUR: 0,
             image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=3540&auto=format&fit=crop",
             type: "course" as const,
             slug: "master-fisica",
-            comingSoon: true // Custom flag I'll handle in ProductCard or here
+            comingSoon: true
+        },
+        {
+            title: "Máster Profesional en Fundamentos Específicos por Demarcación",
+            description: "Domina cada posición al detalle. Micro-conceptos, perfiles y funciones específicas para desarrollar jugadores inteligentes.",
+            priceMXN: 0,
+            priceEUR: 0,
+            image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=3540&auto=format&fit=crop",
+            type: "course" as const,
+            slug: "master-fundamentos",
+            comingSoon: true
         }
     ];
 

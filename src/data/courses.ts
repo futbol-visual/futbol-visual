@@ -103,5 +103,29 @@ export const coursesData = {
                 ]
             }
         ]
+    },
+    "master-fisica": {
+        slug: "master-fisica",
+        title: "Máster en Preparación Física",
+        subtitle: "Potencia el rendimiento de tu equipo.",
+        description: "Planificación, cargas y prevención de lesiones, adaptado a la realidad del fútbol formativo para potenciar a tus jugadores.",
+        priceEUR: 0,
+        priceMXN: 0,
+        image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=3540",
+        features: [],
+        curriculum: [],
+        comingSoon: true
+    },
+    "master-fundamentos": {
+        slug: "master-fundamentos",
+        title: "Máster en Fundamentos",
+        subtitle: "Domina cada posición al detalle.",
+        description: "Micro-conceptos, perfiles y funciones específicas para desarrollar jugadores inteligentes.",
+        priceEUR: 0,
+        priceMXN: 0,
+        image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=3540",
+        features: [],
+        curriculum: [],
+        comingSoon: true
     }
 };
