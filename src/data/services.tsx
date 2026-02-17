@@ -75,8 +75,8 @@ export const services: Service[] = [
         ],
         pricing: [
             { label: "Sesión suelta", price: "50€", priceMXN: "$1,000 MXN" },
-            { label: "Pack 4 sesiones (10% OFF)", price: "180€", priceMXN: "$3,600 MXN" },
-            { label: "Pack 8 sesiones (20% OFF)", price: "320€", priceMXN: "$6,400 MXN", popular: true },
+            { label: "Pack 4 sesiones (10% DE DESCUENTO)", price: "180€", priceMXN: "$3,600 MXN" },
+            { label: "Pack 8 sesiones (20% DE DESCUENTO)", price: "320€", priceMXN: "$6,400 MXN", popular: true },
         ],
         icon: User,
         color: "from-blue-600/40 to-blue-900/10",

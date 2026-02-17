@@ -53,23 +53,18 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-white font-bold">WhatsApp</p>
-                                    <a href="https://wa.me/34622778036" className="text-gray-400 hover:text-white transition-colors">
-                                        +34 622 778 036
-                                    </a>
+                                    <div className="flex flex-col gap-1">
+                                        <a href="https://wa.me/34622778036" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                                            <span>🇪🇸</span> +34 622 778 036
+                                        </a>
+                                        <a href="https://wa.me/525666677912" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                                            <span>🇲🇽</span> +52 56 6667 7912
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4">
-                                <div className="bg-neutral-800 p-3 rounded-lg text-fv-accent">
-                                    <Phone size={24} />
-                                </div>
-                                <div>
-                                    <p className="text-white font-bold">Teléfono</p>
-                                    <a href="tel:+34622778036" className="text-gray-400 hover:text-white transition-colors">
-                                        +34 622 778 036
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
