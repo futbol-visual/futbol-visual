@@ -27,6 +27,9 @@ export default function Navbar() {
                             <Link href="/packs" className="text-gray-300 hover:text-fv-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">
                                 Packs por Posición
                             </Link>
+                            <Link href="/jugadores" className="text-gray-300 hover:text-fv-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                Área Jugadores
+                            </Link>
                             <Link href="/recursos" className="text-gray-300 hover:text-fv-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">
                                 Recursos
                             </Link>
@@ -63,6 +66,9 @@ export default function Navbar() {
                         </Link>
                         <Link href="/packs" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                             Packs por Posición
+                        </Link>
+                        <Link href="/jugadores" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                            Área Jugadores
                         </Link>
                         <Link href="/recursos" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                             Recursos
