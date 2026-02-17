@@ -39,7 +39,7 @@ export const services: Service[] = [
         title: "Entrenamiento Individual\n(1 a 1)",
         subtitle: "Mejora máxima y personalizada",
         description: "Entrena con un profesional y mejora tu técnica, táctica y físico de forma específica según tu posición en el campo. Cada sesión está diseñada solo para ti.",
-        videoId: "49933fdb-34aa-402f-ad7f-c6af10a00ce0",
+        // videoId removed as requested
         longDescription: (
             <div className="space-y-6 text-gray-300">
                 <p className="text-xl text-white font-medium">Entrena como un profesional. Mejora más rápido que nunca.</p>
@@ -89,7 +89,7 @@ export const services: Service[] = [
         title: "Entrenamiento Grupal",
         subtitle: "Aprende y compite",
         description: "Mejora en un entorno competitivo y motivador, trabajando técnica y táctica en grupos reducidos con atención individualizada.",
-        videoId: "49933fdb-34aa-402f-ad7f-c6af10a00ce0", // Placeholder
+        videoId: "9778fa7b-2997-4796-a135-7059694ddf56",
         longDescription: (
             <div className="space-y-6 text-gray-300">
                 <p className="text-xl text-white font-medium">Mejora en un entorno competitivo, motivador y personalizado.</p>
