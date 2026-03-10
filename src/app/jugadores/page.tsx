@@ -1,7 +1,7 @@
 'use client';
 
 import { services } from '@/data/services';
-import { Check, ArrowRight, Calendar, Info } from 'lucide-react';
+import { Check, ArrowRight, Calendar, Info, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function JugadoresPage() {
@@ -96,13 +96,24 @@ export default function JugadoresPage() {
                     <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
                         Agenda una llamada gratuita de 15 minutos y evaluaremos tu situación actual para recomendarte el plan de trabajo ideal.
                     </p>
-                    <Link
-                        href="/contacto"
-                        className="inline-flex items-center gap-3 rounded-full bg-white text-black px-8 py-4 text-lg font-bold hover:bg-gray-200 transition-colors"
-                    >
-                        <Calendar size={20} />
-                        Agendar Consultoría Gratuita
-                    </Link>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Link
+                            href="/contacto"
+                            className="inline-flex items-center gap-3 rounded-full bg-white text-black px-8 py-4 text-lg font-bold hover:bg-gray-200 transition-colors w-full sm:w-auto justify-center"
+                        >
+                            <Calendar size={20} />
+                            Agendar Consultoría Gratuita
+                        </Link>
+                        <a
+                            href="https://wa.me/34622778036"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-3 rounded-full bg-[#25D366] text-white px-8 py-4 text-lg font-bold hover:bg-[#128C7E] transition-colors w-full sm:w-auto justify-center shadow-lg"
+                        >
+                            <MessageCircle size={20} />
+                            WhatsApp Directo
+                        </a>
+                    </div>
                 </div>
             </section>
         </div>
