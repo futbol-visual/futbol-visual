@@ -1,5 +1,5 @@
 import { services } from '@/data/services';
-import { ArrowLeft, Calendar, Check, Star, FileText, ImageIcon } from 'lucide-react';
+import { ArrowLeft, Calendar, Check, Star, FileText, ImageIcon, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BunnyVideoPlayer from '@/components/BunnyVideoPlayer';
@@ -147,13 +147,25 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                                     * Los precios en MXN son orientativos.
                                 </p>
 
-                                <Link
-                                    href="/contacto"
-                                    className={`w-full py-4 bg-white hover:bg-gray-200 text-black text-lg font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg transform hover:scale-[1.02]`}
-                                >
-                                    <Calendar size={20} />
-                                    {service.buttonText}
-                                </Link>
+                                <div className="space-y-3 mb-8">
+                                    <Link
+                                        href="/contacto"
+                                        className={`w-full py-4 bg-white hover:bg-gray-200 text-black text-lg font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg transform hover:scale-[1.02]`}
+                                    >
+                                        <Calendar size={20} />
+                                        {service.buttonText}
+                                    </Link>
+
+                                    <a
+                                        href="https://wa.me/34622778036"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full py-4 bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] text-lg font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border border-[#25D366]/30"
+                                    >
+                                        <MessageCircle size={20} />
+                                        Contactar por WhatsApp
+                                    </a>
+                                </div>
 
                                 <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-400">
                                     <Check size={12} className="text-green-500" />

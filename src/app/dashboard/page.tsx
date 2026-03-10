@@ -1,32 +1,65 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { PlayCircle, Download, Calendar } from 'lucide-react';
+import { PlayCircle, Download, Calendar, ExternalLink } from 'lucide-react';
 import PurchaseSuccessModal from '@/components/PurchaseSuccessModal';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import { coursesData } from '@/data/courses';
+import { packsData } from '@/data/packs';
 
 export const metadata = {
     title: 'Mi Área - Fútbol Visual',
     description: 'Panel de control del estudiante.',
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+    const supabase = createClient();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+        redirect('/login');
+    }
+
+    // Fetch user purchases
+    const { data: purchases, error: purchasesError } = await supabase
+        .from('purchases')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('status', 'completed');
+
+    const userName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Entrenador';
+
+    // Combine courses and packs for display
+    const allContent = { ...coursesData, ...packsData };
+    const userPurchases = (purchases || []).map(p => ({
+        ...p,
+        details: allContent[p.product_slug as keyof typeof allContent]
+    })).filter(p => p.details);
+
     return (
         <div className="bg-fv-primary min-h-screen py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Suspense fallback={null}>
                     <PurchaseSuccessModal />
                 </Suspense>
-                <h1 className="text-3xl font-bold text-white mb-8">Hola, Entrenador <span className="text-fv-accent">.</span></h1>
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <h1 className="text-3xl font-bold text-white">Hola, <span className="text-fv-accent capitalize">{userName}</span>.</h1>
+                        <p className="text-gray-400 mt-1">Bienvenido a tu panel de control profesional.</p>
+                    </div>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content Area - My Courses */}
                     <div className="lg:col-span-2 space-y-8">
+                        {/* Featured Course / Continue Learning - Mockup for now, could be dynamic later */}
                         <div className="bg-fv-secondary rounded-2xl p-6 border border-neutral-800">
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                                 <PlayCircle className="text-fv-accent" /> Continuar Aprendiendo
                             </h2>
 
-                            <div className="bg-neutral-900 rounded-xl p-4 flex gap-4 items-center">
-                                <div className="w-32 h-20 bg-neutral-800 rounded-lg bg-cover bg-center flex-shrink-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=3693&auto=format&fit=crop')" }}></div>
+                            <div className="bg-neutral-900 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-center">
+                                <div className="w-full md:w-32 h-20 bg-neutral-800 rounded-lg bg-cover bg-center flex-shrink-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=3693&auto=format&fit=crop')" }}></div>
                                 <div className="flex-1">
                                     <h3 className="text-white font-bold text-sm mb-1">Mediocentros: El Motor del Juego</h3>
                                     <div className="w-full bg-neutral-800 rounded-full h-2 mb-2">
@@ -34,44 +67,55 @@ export default function DashboardPage() {
                                     </div>
                                     <p className="text-xs text-gray-400">45% completado</p>
                                 </div>
-                                <button className="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-fv-accent transition-colors">
+                                <button className="w-full md:w-auto bg-white text-black px-6 py-2 rounded-lg text-sm font-bold hover:bg-fv-accent transition-colors">
                                     Reanudar
                                 </button>
                             </div>
                         </div>
 
                         <div className="bg-fv-secondary rounded-2xl p-6 border border-neutral-800">
-                            <h2 className="text-xl font-bold text-white mb-6">Mis Cursos y Packs</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {/* Link to Laterales Pack */}
-                                <Link href="/dashboard/pack/laterales" className="group relative aspect-video bg-neutral-800 rounded-xl overflow-hidden cursor-pointer block">
-                                    <div className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517466787929-bc90951d6dbb?auto=format&fit=crop&w=800')" }}></div>
-                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <div className="w-12 h-12 bg-fv-accent rounded-full flex items-center justify-center text-black">
-                                            <PlayCircle fill="black" />
-                                        </div>
-                                    </div>
-                                    <div className="absolute bottom-3 left-3">
-                                        <p className="text-white font-bold text-sm">Pack Laterales (30 Clips)</p>
-                                    </div>
-                                </Link>
-
-                                {/* Placeholder for other courses */}
-                                {[1, 2].map((_, i) => (
-                                    <div key={i} className="group relative aspect-video bg-neutral-800 rounded-xl overflow-hidden cursor-pointer">
-                                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <div className="w-12 h-12 bg-fv-accent rounded-full flex items-center justify-center text-black">
-                                                <PlayCircle fill="black" />
-                                            </div>
-                                        </div>
-                                        <div className="absolute bottom-3 left-3">
-                                            <p className="text-white font-bold text-sm">Curso #{i + 1}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-xl font-bold text-white">Mis Cursos y Packs</h2>
+                                <span className="text-xs bg-fv-accent/10 text-fv-accent px-2 py-1 rounded-full border border-fv-accent/20">
+                                    {userPurchases.length} Adquiridos
+                                </span>
                             </div>
+
+                            {userPurchases.length > 0 ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {userPurchases.map((purchase) => (
+                                        <Link
+                                            key={purchase.id}
+                                            href={`/dashboard/${'videos' in purchase.details ? 'pack' : 'curso'}/${purchase.product_slug}`}
+                                            className="group relative aspect-video bg-neutral-800 rounded-xl overflow-hidden cursor-pointer block border border-white/5 hover:border-fv-accent/30 transition-all shadow-lg"
+                                        >
+                                            <div
+                                                className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity"
+                                                style={{ backgroundImage: `url('${purchase.details.image || 'https://images.unsplash.com/photo-1517466787929-bc90951d6dbb?auto=format&fit=crop&w=800'}')` }}
+                                            ></div>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:from-black/80 transition-all"></div>
+                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100">
+                                                <div className="w-12 h-12 bg-fv-accent rounded-full flex items-center justify-center text-black shadow-xl">
+                                                    <PlayCircle fill="black" />
+                                                </div>
+                                            </div>
+                                            <div className="absolute bottom-3 left-3 right-3">
+                                                <p className="text-white font-bold text-sm truncate">{purchase.details.title}</p>
+                                                <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">
+                                                    {'videos' in purchase.details ? 'Pack' : 'Curso'} • Acceso Completo
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="text-center py-12 bg-neutral-900/50 rounded-xl border border-dashed border-neutral-800">
+                                    <p className="text-gray-400 mb-4">Aún no tienes cursos o packs adquiridos.</p>
+                                    <Link href="/" className="inline-flex items-center gap-2 text-fv-accent font-bold hover:underline">
+                                        Explorar Catálogo <ExternalLink size={14} />
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     </div>
 
