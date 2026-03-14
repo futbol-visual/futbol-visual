@@ -55,6 +55,9 @@ export default function ContactPage() {
                                     <p className="text-white font-bold">WhatsApp</p>
                                     <div className="flex flex-col gap-1">
                                         <a href="https://wa.me/525666677912" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                                            <span>🇪🇸</span> +34 622 778 036
+                                        </a>
+                                        <a href="https://wa.me/525666677912" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                                             <span>🇲🇽</span> +52 56 6667 7912
                                         </a>
                                     </div>
