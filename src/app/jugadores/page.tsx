@@ -105,7 +105,7 @@ export default function JugadoresPage() {
                             Agendar Consultoría Gratuita
                         </Link>
                         <a
-                            href="https://wa.me/34622778036"
+                            href="https://wa.me/525666677912"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-3 rounded-full bg-[#25D366] text-white px-8 py-4 text-lg font-bold hover:bg-[#128C7E] transition-colors w-full sm:w-auto justify-center shadow-lg"

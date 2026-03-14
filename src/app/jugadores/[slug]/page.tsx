@@ -157,7 +157,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                                     </Link>
 
                                     <a
-                                        href="https://wa.me/34622778036"
+                                        href="https://wa.me/525666677912"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full py-4 bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] text-lg font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border border-[#25D366]/30"
