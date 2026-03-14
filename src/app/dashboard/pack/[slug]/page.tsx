@@ -78,16 +78,16 @@ export default function PackViewer({ params }: { params: { slug: string } }) {
                 {/* Video Player Area */}
                 <div className="flex-1 bg-black flex items-center justify-center p-4 md:p-8 overflow-y-auto">
                     <div className="w-full max-w-4xl aspect-video bg-neutral-900 rounded-xl overflow-hidden shadow-2xl relative group">
-                        {currentVideo.bunnyVideoId ? (
+                        {'bunnyVideoId' in currentVideo && currentVideo.bunnyVideoId ? (
                             <BunnyVideoPlayer videoId={currentVideo.bunnyVideoId} title={currentVideo.title} />
                         ) : (
                             <video
-                                key={currentVideo.url}
+                                key={'url' in currentVideo ? currentVideo.url : undefined}
                                 controls
                                 className="w-full h-full object-contain"
                                 poster="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=3540&auto=format&fit=crop"
                             >
-                                <source src={currentVideo.url} type="video/mp4" />
+                                <source src={'url' in currentVideo ? currentVideo.url : undefined} type="video/mp4" />
                                 Tu navegador no soporta el elemento de video.
                             </video>
                         )}
