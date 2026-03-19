@@ -11,6 +11,7 @@ interface ProductCardProps {
     type: 'course' | 'pack';
     slug: string;
     comingSoon?: boolean;
+    recommended?: boolean;
 }
 
 export default function ProductCard({
@@ -21,7 +22,8 @@ export default function ProductCard({
     image,
     type,
     slug,
-    comingSoon
+    comingSoon,
+    recommended
 }: ProductCardProps) {
     const isCourse = type === 'course';
     const href = isCourse ? `/cursos/${slug}` : `/packs/${slug}`;
@@ -65,6 +67,11 @@ export default function ProductCard({
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-2 ${isCourse ? 'bg-fv-accent text-black' : 'bg-white/20 text-white backdrop-blur-md'}`}>
                         {isCourse ? 'Curso Completo' : 'Pack por Posición'}
                     </span>
+                    {recommended && (
+                        <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-2 ml-2 bg-yellow-400 text-black shadow-[0_0_10px_rgba(250,204,21,0.5)]">
+                            ★ Recomendado
+                        </span>
+                    )}
                     <h3 className="text-xl font-bold text-white leading-tight">{title}</h3>
                 </div>
             </div>

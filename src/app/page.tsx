@@ -10,33 +10,32 @@ export default function Home() {
 
     const featuredCourses = [
         {
-            title: "Máster en Análisis Táctico",
-            description: "Aprende a analizar el juego como un profesional. Desglosamos las fases del juego, estructuras y patrones para que domines la pizarra.",
+            title: "Curso Profesional de Metodología de Entrenamiento en Fútbol Formativo",
+            description: "Curso online dirigido a entrenadores que buscan estructurar mejor sus entrenamientos, definir una idea de juego clara y optimizar el rendimiento mediante una metodología actual. 🚀 Lanzamiento: Abril 2026",
             priceMXN: 5900,
             priceEUR: 299,
-            image: "https://images.unsplash.com/photo-1518605348433-e341908d5f66?q=80&w=3540&auto=format&fit=crop", // Placeholder
+            image: "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=3540&auto=format&fit=crop",
+            type: "course" as const,
+            slug: "metodologia-futbol-formativo",
+            recommended: true
+        },
+        {
+            title: "Máster Profesional en Análisis Táctico en Fútbol",
+            description: "Aprende a analizar el juego como un profesional. Desglosamos las fases del juego, estructuras y patrones para que domines la pizarra.",
+            priceMXN: 11800,
+            priceEUR: 599,
+            image: "/images/master-analisis-header.png",
             type: "course" as const,
             slug: "master-analisis"
         },
         {
-            title: "Máster en Preparación Física Aplicada al Fútbol Base",
-            description: "Planificación, cargas y prevención de lesiones, adaptado a la realidad del fútbol formativo para potenciar a tus jugadores.",
-            priceMXN: 0,
-            priceEUR: 0,
-            image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=3540&auto=format&fit=crop",
+            title: "Máster Profesional en Preparación Física Aplicada al Fútbol Formativo",
+            description: "Un programa completo para dominar la preparación física integrada en las etapas formativas.",
+            priceMXN: 11800,
+            priceEUR: 599,
+            image: "/images/master-fisica-header.png",
             type: "course" as const,
-            slug: "master-fisica",
-            comingSoon: true
-        },
-        {
-            title: "Máster Profesional en Fundamentos Específicos por Demarcación",
-            description: "Domina cada posición al detalle. Micro-conceptos, perfiles y funciones específicas para desarrollar jugadores inteligentes.",
-            priceMXN: 0,
-            priceEUR: 0,
-            image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=3540&auto=format&fit=crop",
-            type: "course" as const,
-            slug: "master-fundamentos",
-            comingSoon: true
+            slug: "master-fisica"
         }
     ];
 

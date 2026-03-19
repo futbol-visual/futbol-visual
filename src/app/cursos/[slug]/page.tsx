@@ -2,14 +2,14 @@
 
 import { coursesData } from '@/data/courses';
 import SectionHeader from '@/components/SectionHeader';
-import { CheckCircle, PlayCircle, Lock, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle, PlayCircle, Lock, ChevronDown, ChevronUp, AlertCircle, TrendingUp, Users, Gift } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import BuyButton from '@/components/BuyButton';
 
 export default function CourseDetailsPage({ params }: { params: { slug: string } }) {
     const slug = params.slug as keyof typeof coursesData;
-    const course = coursesData[slug];
+    const course = coursesData[slug] as any;
     const [openModuleIndex, setOpenModuleIndex] = useState<number | null>(0);
 
     if (!course) {
@@ -42,16 +42,51 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                         </div>
 
                         {/* Description */}
-                        <div className="bg-fv-secondary/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-8 mb-12">
+                        <div className="bg-fv-secondary/30 backdrop-blur-sm border border-fv-accent/20 border-l-4 border-l-fv-accent rounded-2xl p-8 mb-12 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
                             <h2 className="text-2xl font-bold text-white mb-4">Descripción</h2>
-                            <p className="text-gray-300 leading-relaxed">{course.description}</p>
+                            <p className="text-gray-300 leading-relaxed whitespace-pre-line">{course.longDescription || course.description}</p>
                         </div>
+
+                        {/* Benefits */}
+                        {course.mainBenefits && course.mainBenefits.length > 0 && (
+                            <div className="mb-12 bg-gradient-to-br from-fv-secondary to-neutral-900 border border-neutral-800 rounded-2xl p-8">
+                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                                    <TrendingUp className="text-fv-accent" />
+                                    Con este curso vas a lograr:
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {course.mainBenefits.map((benefit: string, i: number) => (
+                                        <div key={i} className="flex gap-3 text-gray-300 items-start">
+                                            <CheckCircle className="text-fv-accent flex-shrink-0 mt-1" size={20} />
+                                            <span>{benefit}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Target Audience */}
+                        {course.targetAudience && course.targetAudience.length > 0 && (
+                            <div className="mb-12">
+                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                                    <Users className="text-blue-400" />
+                                    ¿Para quién es este curso?
+                                </h2>
+                                <div className="flex flex-wrap gap-3">
+                                    {course.targetAudience.map((audience: string, i: number) => (
+                                        <span key={i} className="bg-blue-500/10 border border-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium">
+                                            {audience}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Curriculum */}
                         <div className="mb-12">
                             <h2 className="text-2xl font-bold text-white mb-6">Temario del Curso</h2>
                             <div className="space-y-4">
-                                {course.curriculum.map((module, index) => (
+                                {course.curriculum.map((module: any, index: number) => (
                                     <div key={index} className="border border-neutral-800 rounded-xl overflow-hidden bg-fv-secondary">
                                         <button
                                             onClick={() => setOpenModuleIndex(openModuleIndex === index ? null : index)}
@@ -68,11 +103,16 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
 
                                         {openModuleIndex === index && (
                                             <div className="border-t border-neutral-800 bg-black/20">
-                                                {module.lessons.map((lesson, lessonIndex) => (
-                                                    <div key={lessonIndex} className="p-4 pl-14 flex items-center gap-3 text-sm text-gray-400 border-b border-neutral-800/50 last:border-0 hover:text-white transition-colors">
-                                                        <PlayCircle size={16} className="text-fv-accent" />
-                                                        <span>{lesson}</span>
-                                                        <Lock size={14} className="ml-auto opacity-50" />
+                                                {module.description && (
+                                                    <div className="p-4 pl-14 text-sm text-gray-400 border-b border-neutral-800/50 bg-fv-secondary/50 italic">
+                                                        {module.description}
+                                                    </div>
+                                                )}
+                                                {module.lessons.map((lesson: string, lessonIndex: number) => (
+                                                    <div key={lessonIndex} className="p-4 pl-14 flex items-start gap-3 text-sm text-gray-400 border-b border-neutral-800/50 last:border-0 hover:text-white transition-colors">
+                                                        <PlayCircle size={16} className="text-fv-accent mt-0.5" />
+                                                        <span className="flex-1 leading-relaxed">{lesson}</span>
+                                                        <Lock size={14} className="ml-auto opacity-50 mt-1" />
                                                     </div>
                                                 ))}
                                             </div>
@@ -81,6 +121,27 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                                 ))}
                             </div>
                         </div>
+
+                        {/* Bonus */}
+                        {course.bonus && course.bonus.length > 0 && (
+                            <div className="mb-12 bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-8 relative overflow-hidden">
+                                <div className="absolute -right-6 -top-6 text-yellow-500/20">
+                                    <Gift size={120} />
+                                </div>
+                                <h2 className="text-2xl font-bold text-yellow-500 mb-6 flex items-center gap-2 relative z-10">
+                                    <Gift />
+                                    Material Extra (Bonus)
+                                </h2>
+                                <div className="space-y-3 relative z-10">
+                                    {course.bonus.map((item: string, i: number) => (
+                                        <div key={i} className="flex gap-3 text-yellow-100/80 items-start">
+                                            <span className="text-yellow-500 font-bold mt-1">+</span>
+                                            <span>{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Right Column: Sticky Buy Box */}
@@ -98,12 +159,24 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                                 slug={course.slug}
                                 priceId={course.priceEUR}
                                 title={course.title}
-                                className="block w-full bg-black text-white text-center py-4 rounded-xl font-bold text-lg hover:bg-neutral-800 transition-all hover:scale-105 shadow-lg mb-6 flex items-center justify-center gap-2"
-                                btnText="Comprar Ahora"
+                                className="block w-full bg-black text-white text-center py-4 rounded-xl font-bold text-lg hover:bg-neutral-800 transition-all hover:scale-105 shadow-lg mb-4 flex items-center justify-center gap-2"
+                                btnText={course.ctas ? course.ctas[0] : "Comprar Ahora"}
                             />
 
+                            {course.ctas && course.ctas[1] && (
+                                <BuyButton
+                                    slug={course.slug}
+                                    priceId={course.priceEUR}
+                                    title={course.title}
+                                    className="block w-full bg-fv-accent text-black text-center py-4 rounded-xl font-bold text-sm hover:brightness-110 transition-all shadow-md mb-6 flex items-center justify-center gap-2"
+                                    btnText={course.ctas[1]}
+                                />
+                            )}
+
+                            {!course.ctas || !course.ctas[1] ? <div className="mb-2"></div> : null}
+
                             <div className="space-y-4 mb-8">
-                                {course.features.map((feature, i) => (
+                                {course.features.map((feature: string, i: number) => (
                                     <div key={i} className="flex items-center gap-3 text-sm font-medium text-gray-700">
                                         <CheckCircle size={18} className="text-green-600 flex-shrink-0" />
                                         <span>{feature}</span>
@@ -114,7 +187,6 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                             <div className="border-t border-gray-200 pt-6 text-center">
                                 <p className="text-xs text-gray-400 mb-2">Garantía de devolución de 15 días</p>
                                 <div className="flex justify-center gap-2 opacity-50">
-                                    {/* Icons for payment methods could go here */}
                                     <div className="h-6 w-10 bg-gray-200 rounded"></div>
                                     <div className="h-6 w-10 bg-gray-200 rounded"></div>
                                 </div>
