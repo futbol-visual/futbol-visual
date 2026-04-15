@@ -83,6 +83,34 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                             </div>
                         )}
 
+                        {/* Custom Visual Panel for Group Training */}
+                        {service.slug === 'entrenamiento-grupal' && !service.videoId && !service.image && (
+                            <div className="bg-gradient-to-br from-purple-600/20 to-purple-900/10 rounded-3xl p-8 border border-purple-500/30 backdrop-blur-sm relative overflow-hidden">
+                                <div className="absolute -right-10 -top-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div>
+                                <h3 className="text-2xl font-bold text-white mb-4 relative z-10 flex items-center gap-2">
+                                    <Star className="text-purple-400" size={24} />
+                                    Dinámica, Ritmo y Competencia
+                                </h3>
+                                <p className="text-purple-200 relative z-10 text-lg">
+                                    El trabajo grupal es el puente perfecto entre la técnica individual y la realidad de un partido. Eleva tu exigencia entrenando de manera interactiva.
+                                </p>
+                                <div className="mt-6 flex flex-col sm:flex-row gap-4 relative z-10">
+                                    <div className="bg-black/40 rounded-xl p-4 flex-1 border border-purple-500/20 text-center shadow-lg">
+                                        <span className="block text-3xl font-bold text-purple-400 mb-1">100%</span>
+                                        <span className="text-xs text-gray-400 uppercase tracking-wider font-bold">Intensidad</span>
+                                    </div>
+                                    <div className="bg-black/40 rounded-xl p-4 flex-1 border border-purple-500/20 text-center shadow-lg">
+                                        <span className="block text-3xl font-bold text-fv-accent mb-1">4-5</span>
+                                        <span className="text-xs text-gray-400 uppercase tracking-wider font-bold">Jugadores Max</span>
+                                    </div>
+                                    <div className="bg-black/40 rounded-xl p-4 flex-1 border border-purple-500/20 text-center shadow-lg">
+                                        <span className="block text-2xl font-bold text-white mb-2 mt-1"><Check size={28} className="mx-auto" /></span>
+                                        <span className="text-xs text-gray-400 uppercase tracking-wider font-bold">Táctica Real</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                         {/* Sample Reports Section */}
                         {service.sampleReports && service.sampleReports.length > 0 && (
                             <div className="bg-neutral-900/50 rounded-3xl p-8 border border-white/5 backdrop-blur-sm">

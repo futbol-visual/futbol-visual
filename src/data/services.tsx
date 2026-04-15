@@ -89,7 +89,6 @@ export const services: Service[] = [
         title: "Entrenamiento Grupal",
         subtitle: "Aprende y compite",
         description: "Mejora en un entorno competitivo y motivador, trabajando técnica y táctica en grupos reducidos con atención individualizada.",
-        videoId: "9778fa7b-2997-4796-a135-7059694ddf56",
         longDescription: (
             <div className="space-y-6 text-gray-300">
                 <p className="text-xl text-white font-medium">Mejora en un entorno competitivo, motivador y personalizado.</p>
@@ -139,7 +138,6 @@ export const services: Service[] = [
         title: "Video Análisis Individual",
         subtitle: "Descubre tus fortalezas",
         description: "Analizamos tus partidos y te entregamos un informe profesional con fortalezas y áreas de mejora. Ideal para acelerar tu desarrollo.",
-        image: "/images/video-analisis-example.jpg",
         sampleReports: [
             { title: "Informe Profesional Escrito", url: "/reports/informe-escrito.pdf" },
             { title: "Informe Profesional Visual", url: "/reports/informe-visual.pdf" }
