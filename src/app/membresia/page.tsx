@@ -46,7 +46,7 @@ export default function MembershipPage() {
                             <ul className="space-y-4">
                                 {[
                                     "Acceso a TODOS los cursos actuales y futuros",
-                                    "Librería completa de packs por posición",
+                                    "Librería completa de packs de video",
                                     "Descarga ilimitada de recursos",
                                     "Sesiones de análisis en vivo mensuales",
                                     "Comunidad privada de entrenadores",

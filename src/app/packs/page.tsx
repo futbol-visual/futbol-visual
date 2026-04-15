@@ -95,7 +95,7 @@ export default function PacksPage() {
         <div className="bg-fv-primary min-h-screen py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <SectionHeader
-                    title="Packs por Posición"
+                    title="Packs de Video"
                     subtitle="Mejora el rendimiento de tus jugadores con formación específica."
                 />
 

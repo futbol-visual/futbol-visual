@@ -159,7 +159,7 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                         <div>
-                            <span className="text-blue-400 font-bold tracking-wider text-sm uppercase mb-2 block">Específico por Posición</span>
+                            <span className="text-blue-400 font-bold tracking-wider text-sm uppercase mb-2 block">Análisis en Detalle</span>
                             <h2 className="text-3xl md:text-4xl font-bold text-white">Packs de Video <span className="text-fv-accent">.</span></h2>
                             <p className="text-gray-400 mt-3 max-w-xl text-lg">
                                 Mejora el rendimiento individual de tus jugadores con colecciones de clips categorizados por demarcación.

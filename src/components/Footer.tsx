@@ -27,7 +27,7 @@ export default function Footer() {
                         <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Enlaces</h4>
                         <ul className="space-y-2">
                             <li><Link href="/cursos" className="hover:text-fv-accent transition-colors">Cursos</Link></li>
-                            <li><Link href="/packs" className="hover:text-fv-accent transition-colors">Packs por Posición</Link></li>
+                            <li><Link href="/packs" className="hover:text-fv-accent transition-colors">Packs de Video</Link></li>
                             <li><Link href="/jugadores" className="hover:text-fv-accent transition-colors">Área Jugadores</Link></li>
                             <li><Link href="/recursos" className="hover:text-fv-accent transition-colors">Recursos Tácticos</Link></li>
                             <li><Link href="/membresia" className="hover:text-fv-accent transition-colors">Mentorías</Link></li>
