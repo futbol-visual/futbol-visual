@@ -4,10 +4,16 @@ import { ArrowRight, BookOpen, Video, Users, CheckCircle } from 'lucide-react';
 export default function HeroSection() {
     return (
         <div className="relative overflow-hidden bg-fv-primary pb-16 pt-16 sm:pb-24 lg:pb-32">
-            {/* Background decoration with pulse animation */}
-            <div className="absolute top-0 transform -translate-x-1/2 left-1/2 w-full h-[500px] bg-fv-accent/20 blur-[120px] rounded-full opacity-30 pointer-events-none animate-pulse"></div>
+            {/* Tactical Grid Background */}
+            <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+                 style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+            </div>
 
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {/* Glowing Tactical Orbs */}
+            <div className="absolute top-[-10%] left-[-10%] w-full max-w-[600px] aspect-square bg-fv-accent/20 blur-[150px] rounded-full opacity-60 pointer-events-none animate-pulse mix-blend-screen"></div>
+            <div className="absolute bottom-[10%] right-[-5%] w-full max-w-[500px] aspect-square bg-blue-600/20 blur-[150px] rounded-full opacity-30 pointer-events-none mix-blend-screen"></div>
+
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
                 <div className="lg:grid lg:grid-cols-12 lg:gap-x-12 lg:gap-y-20 flex flex-col">
                     
                     {/* Right column (Visual & Functional Links) */}
