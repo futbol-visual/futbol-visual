@@ -21,7 +21,8 @@ export default function ForgotPasswordPage() {
         });
 
         if (error) {
-            setMessage({ type: 'error', text: "No hemos podido procesar tu solicitud. Verifica el email." });
+            console.error("Supabase Reset Password Error:", error);
+            setMessage({ type: 'error', text: `Error: ${error.message}` });
             setIsLoading(false);
         } else {
             setMessage({ type: 'success', text: "¡Listo! Te hemos enviado un enlace seguro a tu correo para restablecer tu contraseña." });
