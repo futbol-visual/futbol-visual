@@ -34,5 +34,42 @@ export const packsData = {
                 url: "https://www.w3schools.com/html/mov_bbb.mp4"
             }))
         ]
+    },
+    "mediocentros-doble-pivote": {
+        title: "Mediocentros: relaciones del doble pivote",
+        subtitle: "Comprende, entrena y aplica las relaciones tácticas clave del doble pivote en diferentes contextos de juego para dominar el centro del campo.",
+        priceMXN: 979,
+        priceEUR: 49,
+        image: "https://images.unsplash.com/photo-1522778526582-12248ce8b2ca?q=80&w=3540&auto=format&fit=crop",
+        valueBullets: [
+            {
+                title: "Qué aprenderás",
+                description: "Sinergias defensivas y ofensivas, coberturas mutuas, escalonamiento y distribución de roles."
+            },
+            {
+                title: "Qué problema resuelve",
+                description: "Falta de cohesión y desequilibrio en la medular durante transiciones y ataques organizados."
+            },
+            {
+                title: "A quién va dirigido",
+                description: "Entrenadores de formación y rendimiento, analistas tácticos y mediocentros que buscan perfeccionar su juego."
+            }
+        ],
+        contentSummary: {
+            title: "20 Videos de Análisis y Tareas",
+            description: "El pack está estructurado en bloques de formación que abarcan todas las fases del juego. A través de 20 videos detallados, exploramos conceptos como la salida de balón, la presión tras pérdida, coberturas en bloque medio/bajo y el desmarque de apoyo en ataque organizado. Una guía visual directa y enfocada 100% en el entendimiento táctico."
+        },
+        previewVideo: {
+            title: "Muestra Gratuita: Escalonamiento en Salida de Balón",
+            url: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        results: {
+            title: "Lo que serás capaz de hacer",
+            items: [
+                "Identificar y corregir errores de posicionamiento en tu equipo.",
+                "Diseñar tareas específicas que potencien la conexión entre tus mediocentros.",
+                "Transferir de forma directa los conceptos al campo de entrenamiento."
+            ]
+        }
     }
 };
