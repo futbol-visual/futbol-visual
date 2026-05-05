@@ -53,6 +53,17 @@ export default function PacksPage() {
             category: "Mediocentros"
         },
         {
+            title: "Mediocentros: relación del doble pivote",
+            description: "Análisis en profundidad de la coordinación, coberturas y distribución de juego en el doble pivote.",
+            priceMXN: 979,
+            priceEUR: 49,
+            image: "https://images.unsplash.com/photo-1522778526582-12248ce8b2ca?q=80&w=3540&auto=format&fit=crop",
+            type: "pack" as const,
+            slug: "mediocentros-doble-pivote",
+            category: "Mediocentros",
+            videosCount: 20
+        },
+        {
             title: "Interiores y Mediapuntas",
             description: "Juego entre líneas, filtrar pases y llegada al área.",
             priceMXN: 979,

@@ -12,6 +12,7 @@ interface ProductCardProps {
     slug: string;
     comingSoon?: boolean;
     recommended?: boolean;
+    videosCount?: number;
 }
 
 export default function ProductCard({
@@ -23,7 +24,8 @@ export default function ProductCard({
     type,
     slug,
     comingSoon,
-    recommended
+    recommended,
+    videosCount
 }: ProductCardProps) {
     const isCourse = type === 'course';
     const href = isCourse ? `/cursos/${slug}` : `/packs/${slug}`;
@@ -95,7 +97,7 @@ export default function ProductCard({
                         ) : (
                             <div className="flex items-center gap-1 text-xs text-gray-400">
                                 <Video size={16} />
-                                <span>Ejercicios</span>
+                                <span>{videosCount ? `${videosCount} Videos` : 'Ejercicios'}</span>
                             </div>
                         )}
                     </div>
