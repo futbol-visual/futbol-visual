@@ -70,6 +70,12 @@ export const packsData = {
                 "Diseñar tareas específicas que potencien la conexión entre tus mediocentros.",
                 "Transferir de forma directa los conceptos al campo de entrenamiento."
             ]
-        }
+        },
+        videos: Array.from({ length: 20 }, (_, i) => ({
+            id: i + 1,
+            title: `Corte Táctico: Relaciones del Doble Pivote #${i + 1}`,
+            duration: "1:30",
+            url: "https://www.w3schools.com/html/mov_bbb.mp4"
+        }))
     }
 };
