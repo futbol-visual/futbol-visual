@@ -1,16 +1,19 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import { PlayCircle, Download, Calendar, ExternalLink } from 'lucide-react';
-import PurchaseSuccessModal from '@/components/PurchaseSuccessModal';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { coursesData } from '@/data/courses';
-import { packsData } from '@/data/packs';
+import dynamic from 'next/dynamic';
+import { 
+    TrendingUp, 
+    Target, 
+    CheckCircle2, 
+    Calendar, 
+    ChevronRight, 
+    Info,
+    Quote
+} from 'lucide-react';
+import Link from 'next/link';
 
-export const metadata = {
-    title: 'Mi Área - Fútbol Visual',
-    description: 'Panel de control del estudiante.',
-};
+// Dynamically import the radar chart to avoid SSR issues
+const DevelopmentRadar = dynamic(() => import('@/components/dashboard/DevelopmentRadar'), { ssr: false });
 
 export default async function DashboardPage() {
     const supabase = createClient();
@@ -20,140 +23,165 @@ export default async function DashboardPage() {
         redirect('/login');
     }
 
-    // Fetch user purchases
-    const { data: purchases, error: purchasesError } = await supabase
-        .from('purchases')
+    // Fetch mentorship profile
+    const { data: profile } = await supabase
+        .from('mentorship_profiles')
         .select('*')
         .eq('user_id', user.id)
-        .eq('status', 'completed');
+        .single();
+
+    // Fetch latest resources
+    const { data: recentFiles } = await supabase
+        .from('mentorship_files')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(3);
 
     const userName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Entrenador';
 
-    // Combine courses and packs for display
-    const allContent = { ...coursesData, ...packsData };
-    const userPurchases = (purchases || []).map(p => ({
-        ...p,
-        details: allContent[p.product_slug as keyof typeof allContent]
-    })).filter(p => p.details);
+    // Map recent files to next steps or use defaults if none exist
+    const nextSteps = recentFiles && recentFiles.length > 0 
+        ? recentFiles.map((file, index) => ({
+            title: `Revisar: ${file.title}`,
+            category: file.url.includes('youtube') || file.url.includes('vimeo') ? 'Video de Análisis' : 'Material de Apoyo',
+            status: index === 0 ? 'pending' : 'completed',
+            color: index === 0 ? 'text-blue-500' : 'text-fv-accent',
+            link: '/dashboard/mentoria?tab=recursos'
+        }))
+        : [
+            { 
+                title: 'Agenda tu primera sesión con el mentor', 
+                category: 'Onboarding',
+                status: 'pending',
+                color: 'text-amber-500',
+                link: '/dashboard/mentoria?tab=sesiones'
+            },
+            { 
+                title: 'Define tus objetivos principales', 
+                category: 'Planificación',
+                status: 'pending',
+                color: 'text-blue-500',
+                link: '/dashboard/mentoria?tab=resumen'
+            }
+        ];
 
     return (
-        <div className="bg-fv-primary min-h-screen py-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <Suspense fallback={null}>
-                    <PurchaseSuccessModal />
-                </Suspense>
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-                    <div>
-                        <h1 className="text-3xl font-bold text-white">Hola, <span className="text-fv-accent capitalize">{userName}</span>.</h1>
-                        <p className="text-gray-400 mt-1">Bienvenido a tu panel de control profesional.</p>
+        <div className="min-h-screen bg-[#020617] p-8 pb-20">
+            <div className="max-w-5xl mx-auto space-y-8">
+                
+                {/* Progress Card - Simplified without Radar */}
+                <div className="bg-gradient-to-br from-fv-accent/10 to-indigo-500/5 border border-white/5 rounded-[2.5rem] p-10 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-8">
+                        <Info className="text-gray-500 cursor-help hover:text-gray-400 transition-colors" size={20} />
+                    </div>
+                    
+                    <div className="max-w-md mx-auto text-center space-y-4">
+                        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-fv-accent/10 border border-fv-accent/20 text-fv-accent text-[10px] font-bold uppercase tracking-widest">
+                            Estado del Entrenador
+                        </div>
+                        <h2 className="text-4xl font-black text-white tracking-tighter">Tu evolución no se detiene.</h2>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            Has completado el <span className="font-bold text-white">45% de tus objetivos</span> este mes. Revisa tus áreas de desarrollo en la sección de mentoría.
+                        </p>
+                        <Link href="/dashboard/mentoria?tab=areas" className="inline-flex items-center gap-2 bg-white text-black font-black px-6 py-3 rounded-2xl hover:scale-105 transition-all shadow-xl text-xs uppercase tracking-tight">
+                            Ver Radar de Habilidades <ChevronRight size={14} />
+                        </Link>
                     </div>
                 </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Where am I now? */}
+                    <div className="group bg-white/5 border border-white/5 rounded-3xl p-8 hover:bg-white/[0.07] transition-all cursor-pointer">
+                        <div className="flex items-start justify-between mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center">
+                                <TrendingUp className="text-indigo-400" size={24} />
+                            </div>
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-wide">¿Dónde estoy ahora?</h3>
+                        <p className="text-sm text-gray-400 mb-6 leading-relaxed">Estás por encima del 68% de entrenadores en nuestra plataforma.</p>
+                        <button className="text-xs font-bold text-indigo-400 px-6 py-2.5 rounded-xl border border-indigo-500/20 hover:bg-indigo-500/10 transition-all">
+                            Ver análisis completo
+                        </button>
+                    </div>
+
+                    {/* Where do I want to be? */}
+                    <div className="group bg-white/5 border border-white/5 rounded-3xl p-8 hover:bg-white/[0.07] transition-all cursor-pointer">
+                        <div className="flex items-start justify-between mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-fv-accent/10 flex items-center justify-center">
+                                <Target className="text-fv-accent" size={24} />
+                            </div>
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-wide">¿Dónde quiero estar en 3 meses?</h3>
+                        <p className="text-sm text-gray-400 mb-6 leading-relaxed">Tu objetivo: Ser un entrenador referente y vivir 100% de tu proyecto.</p>
+                        <button className="text-xs font-bold text-fv-accent px-6 py-2.5 rounded-xl border border-fv-accent/20 hover:bg-fv-accent/10 transition-all">
+                            Ver plan de acción
+                        </button>
+                    </div>
+                </div>
+
+                {/* Bottom Row: Next Steps & Session */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Main Content Area - My Courses */}
-                    <div className="lg:col-span-2 space-y-8">
-                        {/* Featured Course / Continue Learning - Mockup for now, could be dynamic later */}
-                        <div className="bg-fv-secondary rounded-2xl p-6 border border-neutral-800">
-                            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                <PlayCircle className="text-fv-accent" /> Continuar Aprendiendo
-                            </h2>
-
-                            <div className="bg-neutral-900 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-center">
-                                <div className="w-full md:w-32 h-20 bg-neutral-800 rounded-lg bg-cover bg-center flex-shrink-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=3693&auto=format&fit=crop')" }}></div>
-                                <div className="flex-1">
-                                    <h3 className="text-white font-bold text-sm mb-1">Mediocentros: El Motor del Juego</h3>
-                                    <div className="w-full bg-neutral-800 rounded-full h-2 mb-2">
-                                        <div className="bg-fv-accent h-2 rounded-full" style={{ width: '45%' }}></div>
+                    {/* Next Steps Column */}
+                    <div className="lg:col-span-2 space-y-6">
+                        <h3 className="text-lg font-bold text-white uppercase tracking-widest px-2">Próximos Pasos</h3>
+                        <div className="bg-white/5 border border-white/5 rounded-[2rem] p-4 divide-y divide-white/5">
+                            {nextSteps.map((step, idx) => (
+                                <Link href={step.link} key={idx} className="flex items-center gap-4 p-4 hover:bg-white/5 transition-all cursor-pointer group rounded-xl">
+                                    <div className={`w-6 h-6 shrink-0 flex items-center justify-center ${step.color}`}>
+                                        <CheckCircle2 size={24} strokeWidth={step.status === 'completed' ? 3 : 1.5} />
                                     </div>
-                                    <p className="text-xs text-gray-400">45% completado</p>
-                                </div>
-                                <button className="w-full md:w-auto bg-white text-black px-6 py-2 rounded-lg text-sm font-bold hover:bg-fv-accent transition-colors">
-                                    Reanudar
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="bg-fv-secondary rounded-2xl p-6 border border-neutral-800">
-                            <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-xl font-bold text-white">Mis Cursos y Packs</h2>
-                                <span className="text-xs bg-fv-accent/10 text-fv-accent px-2 py-1 rounded-full border border-fv-accent/20">
-                                    {userPurchases.length} Adquiridos
-                                </span>
-                            </div>
-
-                            {userPurchases.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {userPurchases.map((purchase) => (
-                                        <Link
-                                            key={purchase.id}
-                                            href={`/dashboard/${'videos' in purchase.details ? 'pack' : 'curso'}/${purchase.product_slug}`}
-                                            className="group relative aspect-video bg-neutral-800 rounded-xl overflow-hidden cursor-pointer block border border-white/5 hover:border-fv-accent/30 transition-all shadow-lg"
-                                        >
-                                            <div
-                                                className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity"
-                                                style={{ backgroundImage: `url('${purchase.details.image || 'https://images.unsplash.com/photo-1517466787929-bc90951d6dbb?auto=format&fit=crop&w=800'}')` }}
-                                            ></div>
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:from-black/80 transition-all"></div>
-                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100">
-                                                <div className="w-12 h-12 bg-fv-accent rounded-full flex items-center justify-center text-black shadow-xl">
-                                                    <PlayCircle fill="black" />
-                                                </div>
-                                            </div>
-                                            <div className="absolute bottom-3 left-3 right-3">
-                                                <p className="text-white font-bold text-sm truncate">{purchase.details.title}</p>
-                                                <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">
-                                                    {'videos' in purchase.details ? 'Pack' : 'Curso'} • Acceso Completo
-                                                </p>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="text-center py-12 bg-neutral-900/50 rounded-xl border border-dashed border-neutral-800">
-                                    <p className="text-gray-400 mb-4">Aún no tienes cursos o packs adquiridos.</p>
-                                    <Link href="/" className="inline-flex items-center gap-2 text-fv-accent font-bold hover:underline">
-                                        Explorar Catálogo <ExternalLink size={14} />
-                                    </Link>
-                                </div>
-                            )}
+                                    <div className="flex-1">
+                                        <p className="text-sm font-bold text-white group-hover:text-fv-accent transition-colors">{step.title}</p>
+                                        <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wider mt-0.5">{step.category}</p>
+                                    </div>
+                                    <ChevronRight size={16} className="text-gray-700 group-hover:text-gray-400 transition-colors" />
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Sidebar */}
-                    <div className="space-y-8">
-                        <div className="bg-fv-secondary rounded-2xl p-6 border border-neutral-800">
-                            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                <Download className="text-fv-accent" /> Descargas Recientes
-                            </h2>
-                            <ul className="space-y-3">
-                                <li className="flex items-center justify-between text-sm text-gray-400 hover:text-white cursor-pointer transition-colors p-2 hover:bg-white/5 rounded-lg">
-                                    <span>Microciclo Tipo.pdf</span>
-                                    <Download size={14} />
-                                </li>
-                                <li className="flex items-center justify-between text-sm text-gray-400 hover:text-white cursor-pointer transition-colors p-2 hover:bg-white/5 rounded-lg">
-                                    <span>Plantilla Scouting.xlsx</span>
-                                    <Download size={14} />
-                                </li>
-                            </ul>
+                    {/* Next Session Column */}
+                    <div className="space-y-6">
+                        <h3 className="text-lg font-bold text-white uppercase tracking-widest px-2">Próxima Sesión</h3>
+                        <div className="bg-white/5 border border-white/5 rounded-[2rem] p-8 flex flex-col gap-6">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center shrink-0">
+                                    <Calendar className="text-indigo-400" size={24} />
+                                </div>
+                                <div>
+                                    {profile?.next_call_date ? (
+                                        <>
+                                            <p className="text-lg font-black text-white">
+                                                {new Date(profile.next_call_date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })},{' '}
+                                                {new Date(profile.next_call_date).toLocaleTimeString('es-ES', { hour: '2-digit', minute:'2-digit' })}
+                                            </p>
+                                            <p className="text-xs text-gray-500 font-bold uppercase">Mentoría 1 a 1</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p className="text-lg font-black text-gray-400">Por definir</p>
+                                            <p className="text-xs text-gray-500 font-bold uppercase">Mentoría 1 a 1</p>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="w-full h-px bg-white/5"></div>
+                            <Link href="/dashboard/mentoria?tab=sesiones" className="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-4 rounded-2xl border border-white/10 transition-all text-sm text-center">
+                                {profile?.next_call_date ? 'Preparar sesión' : 'Indicar disponibilidad'}
+                            </Link>
                         </div>
 
-                        <div className="bg-gradient-to-br from-fv-accent/20 to-fv-secondary rounded-2xl p-6 border border-fv-accent/20">
-                            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                <Calendar className="text-fv-accent" /> Próximo Live
-                            </h2>
-                            <p className="text-sm text-gray-300 mb-4">
-                                Análisis en vivo de la Final de Champions.
+                        {/* Motivational Quote */}
+                        <div className="bg-gradient-to-br from-indigo-500/10 to-transparent border border-white/5 rounded-[2rem] p-8 relative overflow-hidden">
+                            <Quote className="absolute -top-4 -right-4 text-white/5" size={80} />
+                            <p className="text-sm text-gray-300 italic font-medium leading-relaxed relative z-10 text-center">
+                                "Un buen entrenador mejora partidos. Un gran entrenador transforma vidas."
                             </p>
-                            <div className="bg-black/40 rounded-lg p-3 text-center mb-4">
-                                <p className="text-2xl font-bold text-white">10 JUN</p>
-                                <p className="text-xs text-gray-400">20:00 CET</p>
-                            </div>
-                            <button disabled className="w-full bg-white/10 text-white py-2 rounded-lg text-sm font-bold cursor-not-allowed">
-                                Solo Miembros PRO
-                            </button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );
