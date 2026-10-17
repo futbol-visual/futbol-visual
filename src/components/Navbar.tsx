@@ -2,12 +2,18 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import AuthButton from './AuthButton';
 
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
+
+    if (pathname && pathname.startsWith('/dashboard')) {
+        return null;
+    }
 
     return (
         <nav className="fixed w-full z-50 bg-fv-primary/90 backdrop-blur-md border-b border-fv-secondary">

@@ -1,9 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Twitter, Instagram, Youtube, Mail } from 'lucide-react';
 
 export default function Footer() {
+    const pathname = usePathname();
+
+    if (pathname && pathname.startsWith('/dashboard')) {
+        return null;
+    }
     return (
         <footer className="bg-fv-secondary border-t border-neutral-800 text-gray-400 py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
